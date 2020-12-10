@@ -1,14 +1,14 @@
 package formularios;
 
 import javax.swing.JOptionPane;
-import modelos.Estudiante;
+import tablas.Conexion;
 import tablas.TablaEstudiante;
-
-
-public class CrearCuenta extends javax.swing.JFrame {
    
-    TablaEstudiante tlbEst;
-    
+public class CrearCuenta extends javax.swing.JFrame{
+   
+    Conexion conex = new Conexion();
+    TablaEstudiante tlbEst = new TablaEstudiante(conex);
+   
    
     public CrearCuenta() {
         initComponents();
@@ -32,7 +32,7 @@ public class CrearCuenta extends javax.swing.JFrame {
         JL_NumTel = new javax.swing.JLabel();
         B_Crear = new javax.swing.JButton();
         JL_Pass = new javax.swing.JLabel();
-        JT_Pass = new javax.swing.JTextField();
+        JT_Pass = new javax.swing.JPasswordField();
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -41,7 +41,8 @@ public class CrearCuenta extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CREAR CUENTA");
 
         JT_Id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,12 +93,6 @@ public class CrearCuenta extends javax.swing.JFrame {
 
         JL_Pass.setText("Contraseña: ");
 
-        JT_Pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JT_PassActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,10 +100,6 @@ public class CrearCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JL_Pass)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JT_Pass))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JL_Correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -126,13 +117,16 @@ public class CrearCuenta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JT_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JL_NumTel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JL_NumTel)
+                            .addComponent(JL_Pass))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JT_NumTel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(B_Crear)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(JT_NumTel))))
+                            .addComponent(JT_Pass))))
                 .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
@@ -195,20 +189,13 @@ public class CrearCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void B_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_CrearActionPerformed
-    //try{
+
         int b=tlbEst.agregarRegistro(JT_Id.getText(), JT_Nombres.getText(), JT_Apellidos.getText(), JT_Correo.getText(), JT_NumTel.getText(), JT_Pass.getText());
         if(b!=0){
             JOptionPane.showMessageDialog(null,"Registro guardado","Estudiante",0);
         }
-    /*}catch(Exception ex){
-      JOptionPane.showMessageDialog(this,ex.getMessage());  
-    }*/
         
     }//GEN-LAST:event_B_CrearActionPerformed
-
-    private void JT_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_PassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JT_PassActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -255,7 +242,7 @@ public class CrearCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField JT_Id;
     private javax.swing.JTextField JT_Nombres;
     private javax.swing.JTextField JT_NumTel;
-    private javax.swing.JTextField JT_Pass;
+    private javax.swing.JPasswordField JT_Pass;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

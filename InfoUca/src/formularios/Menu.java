@@ -4,13 +4,12 @@ public class Menu extends javax.swing.JFrame {
    
     CrearCuenta jfCrearC;
     IniciarSesion jfIniciarS;
-    /**
-     * Creates new form JFMenu
-     */
 
     public Menu() {
         initComponents();
+        this.setVisible(true);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -18,8 +17,12 @@ public class Menu extends javax.swing.JFrame {
 
         B_IniciarSesion = new javax.swing.JButton();
         B_CrearCuenta = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INFO UCA");
+        setForeground(java.awt.Color.red);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         B_IniciarSesion.setText("Iniciar sesión");
         B_IniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -36,28 +39,38 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Info Uca");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(B_CrearCuenta)
-                    .addComponent(B_IniciarSesion))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(B_IniciarSesion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(B_CrearCuenta)
+                .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
-                .addComponent(B_IniciarSesion)
-                .addGap(30, 30, 30)
-                .addComponent(B_CrearCuenta)
-                .addGap(70, 70, 70))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(B_IniciarSesion)
+                    .addComponent(B_CrearCuenta))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void B_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_IniciarSesionActionPerformed
@@ -108,5 +121,6 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton B_CrearCuenta;
     private javax.swing.JButton B_IniciarSesion;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

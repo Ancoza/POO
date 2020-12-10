@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TablaEstudiante {
+
     public ArrayList<Estudiante> lista = new ArrayList<>();
     private Conexion conex;
 
@@ -18,6 +20,7 @@ public class TablaEstudiante {
     private PreparedStatement insertarEstudiante;
     private PreparedStatement modificarEstudiante;
     private PreparedStatement eliminarEstudiante;
+    private PreparedStatement mostrardatos;
 
 
     public TablaEstudiante(Conexion conexion) {
@@ -28,7 +31,7 @@ public class TablaEstudiante {
             insertarEstudiante = conn.prepareStatement("Insert Into Estudiante(id, nombres, apellidos, correo, numTel, password) Values(?, ?, ?, ?, ?, ?)");
             modificarEstudiante = conn.prepareStatement("Update Estudiante Set nombres = ?, apellidos  =?, correo= ?, numTel =?, password=? Where id= ?");
             eliminarEstudiante = conn.prepareStatement("Delete from Estudiante Where id = ?");
-
+            mostrardatos= conn.prepareStatement("Select * from Estudiante where id = ?");
             lista = this.listarRegistros();
         } catch (SQLException ex) {
             Logger.getLogger(TablaEstudiante.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,12 +47,12 @@ public class TablaEstudiante {
             result = new ArrayList<>();
             while (rs.next()) {
                 Estudiante est = new Estudiante();
-                est.setId(rs.getString("id"));
-                est.setNombre(rs.getString("nombres"));
-                est.setApellido(rs.getString("apellidos"));
-                est.setApellido(rs.getString("correo"));
-                est.setNumTel(rs.getString("numTel"));
-                est.setPassword(rs.getString("password"));
+                est.setId(rs.getString("id").trim());
+                est.setNombre(rs.getString("nombres").trim());
+                est.setApellido(rs.getString("apellidos").trim());
+                est.setCorreo(rs.getString("correo").trim());
+                est.setNumTel(rs.getString("numTel").trim());
+                est.setPassword(rs.getString("password").trim());
                 est.setEstado(1);
                 result.add(est);
             }
@@ -65,7 +68,7 @@ public class TablaEstudiante {
         }
         return result;
     }
-
+    
     public int agregarRegistro(String id, String nombres, String apellidos, String correo, String numTel, String password) {
         int result = 0;
         try {
@@ -99,7 +102,7 @@ public class TablaEstudiante {
         }
         return result;
     }
-
+   
     public int eliminarRegistro(String id) {
         int result = 0;
         try {
@@ -111,6 +114,50 @@ public class TablaEstudiante {
             conex.close(conn);
         }
         return result;
+    }
+    
+    public int autenticarEstudiante(String id, String pw){
+        int b = 0;
+        try{
+            for(Estudiante e : lista){
+                if (e.autenticar(id, pw)){
+                    b=1;
+                    break;
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(""+ ex.getMessage());
+        }
+        return b;
+    }
+    
+    public int autenticarId(String id){
+        int b = 0;
+        try{
+            for(Estudiante e : lista){
+                if (e.autenticarId(id)){
+                    b=1;
+                    break;
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(""+ ex.getMessage());
+        }
+        return b;
+    }
+    public String mostrardatos(String id){
+        String d="Error";
+        try{
+            for(Estudiante e : lista){
+                if (e.autenticarId(id)){
+                    String a=e.getId()+e.getNombre()+e.getApellido()+e.getCorreo()+e.getNumTel();
+                    return a;
+                }else{return d;}
+            }
+        }catch(Exception ex){
+            System.out.println(""+ ex.getMessage());
+        }
+        return null;
     }
 
     public String actualizarBD() {
@@ -153,4 +200,56 @@ public class TablaEstudiante {
         }
         return msn;
     }
+       
+    public Estudiante mostrarRegistros(String id) {
+        Estudiante est = new Estudiante();
+        ResultSet rs = null;
+        try {
+            mostrardatos.setString(1, id);
+            rs = mostrardatos.executeQuery();
+            
+            if (rs.next()) {
+                
+                est.setId(rs.getString("id").trim());
+                est.setNombre(rs.getString("nombres").trim());
+                est.setApellido(rs.getString("apellidos").trim());
+                est.setCorreo(rs.getString("correo").trim());
+                est.setNumTel(rs.getString("numTel").trim());
+                est.setEstado(1);
+                
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                conex.close(conn);
+            }
+        }
+        return est;
+    }   
+    
+    public Estudiante mostarDatosEstudiante(String id){
+        Estudiante est = null ;
+        try{
+            for(Estudiante e : lista){
+                System.out.println("Id en el arreglo "+ e.getId() + " id envaido " + id+".");
+                if (e.getId().equals(id)){
+                    est = e;
+                    System.out.println("te encntre");
+                    break;
+                    
+                }
+            }
+            
+            System.out.println("no te encontre");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return est;
+    }
+
+    
 }

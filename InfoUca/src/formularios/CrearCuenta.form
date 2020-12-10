@@ -12,7 +12,8 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="CREAR CUENTA"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -36,11 +37,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="JL_Pass" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="JT_Pass" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="JL_Correo" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -62,14 +58,18 @@
                       <Component id="JT_Id" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="JL_NumTel" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JL_NumTel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="JL_Pass" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="JT_NumTel" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="B_Crear" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="JT_NumTel" max="32767" attributes="0"/>
+                          <Component id="JT_Pass" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -181,10 +181,7 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JT_Pass">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JT_PassActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JPasswordField" name="JT_Pass">
     </Component>
   </SubComponents>
 </Form>

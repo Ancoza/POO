@@ -1,21 +1,21 @@
 package modelos;
 
-public class Estudiante  {
-        
-        private String id;
-	private String correo;
-	private String nombre;
-        private String apellido;
-	private String numTel;
-        private String password;
-        private int estado;
+public class Estudiante {
 
-    public Estudiante (){
+    private String id;
+    private String correo;
+    private String nombre;
+    private String apellido;
+    private String numTel;
+    private String password;
+    private int estado;
 
-	}
-    
-    public Estudiante(String id, String nombre, String apellido, 
-            String correo,String numTel,String password, int estado) {
+    public Estudiante() {
+
+    }
+
+    public Estudiante(String id, String nombre, String apellido,
+            String correo, String numTel, String password, int estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -23,6 +23,21 @@ public class Estudiante  {
         this.numTel = numTel;
         this.password = password;
         this.estado = estado;
+    }
+    
+    public boolean autenticar(String id, String pw) {
+        
+        if (this.id.equals(id) && this.password.equals(pw)) {
+            return true;
+        }
+        return false;
+    }
+    public boolean autenticarId(String id) {
+        
+        if (this.id.equals(id)) {
+            return true;
+        }
+        return false;
     }
 
     public String getId() {
@@ -80,14 +95,15 @@ public class Estudiante  {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
-        return "Estudiante{" + "id=" + id + ", nombres=" + 
-                nombre + ", apellidos=" + apellido + 
-                ", correo=" + correo + ", numTel=" +
-                numTel + ", password="+ password + ", estado=" + estado + '}';
+        return "Estudiante{" + "id=" + id + ", nombres="
+                + nombre + ", apellidos=" + apellido
+                + ", correo=" + correo + ", numTel="
+                + numTel + ", password=" + password + ", estado=" + estado + '}';
     }
 
-        
+
+    
 }
